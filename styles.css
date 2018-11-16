@@ -1,0 +1,135 @@
+* {
+   margin: 0;
+   padding: 0;
+}
+
+:root {
+   --main-color: #086788;
+   --bg-color: #bbb;
+   --light-color: white;
+   --hover-color: #ebebeb;
+   --main2-color: #3a6ea5;
+   --number-font: 'Jaldi', sans-serif;
+   --accent-color: #ff6700;
+}
+
+#title {
+   font-family: var(--number-font);
+   background: var(--accent-color);
+   width: 100%;
+   margin: 0;
+   text-align: center;
+   height: 40px;
+   
+}
+
+#title-tagline {
+   font-family: var(--number-font);
+   background: var(--accent-color);
+   width: 100%;
+   text-align: center;
+   font-size:1em;
+}
+
+
+
+body {
+   background: var(--bg-color);
+   color: white;
+}
+
+
+body, #container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   
+}
+
+#container {
+   border: 3px solid var(--accent-color);
+   margin-top: 50px;
+}
+
+.operator {
+   background: var(--main2-color);
+}
+
+button {
+   height: 100%;
+   width: 100%;
+   font-size: 15px;
+   color: white;
+   background: var(--main-color);
+   border: none;
+}
+
+button:hover {
+   background: var(--hover-color);
+   color: black;
+}
+
+#button-section {
+   width: 280px;
+   height: 350px;
+   font-size: 0;
+   display: grid;
+   grid-template-columns: 25% 25% 25% 25%;
+   grid-template-rows: 20% 20% 20% 20% 20%;
+}
+
+#plus {
+   height: auto;
+   grid-row: 2 /  4;
+   grid-column: 4 / 5;
+}
+
+#equals {
+   height: auto;
+   grid-column: 4 / 5;
+   grid-row: 4 / 6;
+}
+
+#formula-area {
+   width: 280px;
+   height: 45px;
+   font-family: var(--number-font);
+   font-size: 1.5em;
+   background: var(--light-color);
+   color: #777;
+   line-height: 40px;
+   padding: 15px 15px 0px 15px;
+   box-sizing: border-box;
+   text-align: right;
+}
+
+#display-area {
+   width: 280px;
+   height: 90px;
+   font-family: var(--number-font);
+   font-size: 2.3em; 
+   font-weight: bold;
+   background: var(--light-color);
+   letter-spacing: 2px;
+   color: #373737;
+   box-sizing:border-box;
+   overflow: hidden;
+   line-height: 50px;
+   padding: 0 10px;
+   text-align: right;
+}
+
+#footer {
+   width: 100%;
+   background: var(--accent-color);
+   padding: 5px;
+   position: fixed;
+   bottom: 0;
+}
+
+#footer p {
+   text-align: center;
+   font-family: arial;
+   text-transform: uppercase;
+   font-family: var(--number-font);
+}
