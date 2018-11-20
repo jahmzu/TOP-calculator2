@@ -11,6 +11,134 @@ let computed = false;
 let tempNum = "";
 let tempFunc = "";
 
+document.onkeypress = function(e){
+   console.log(e.which);
+   
+   if(!firstNumChosen) {
+         if(e.which >= 48 && e.which <=57|| e.which == 46) {
+            if(e.which == 46 && !decimalUsed) {
+               firstNum = firstNum.concat(".");
+               decimalUsed = true;
+               displayArea.textContent = firstNum;
+            } else if(e.which >= 48 && e.which <=57) {
+               firstNum = firstNum.concat(e.key);
+               displayArea.textContent = firstNum;
+            }
+         }
+   }
+   
+   if(!operatorChosen ) {
+      if(e.which == 42 || e.which == 43 || e.which == 45 || e.which ==47) {
+         firstNumChosen = true;
+         decimalUsed = false;
+         switch(e.which) {
+            case 42:
+               operator = "multiply";
+               break;
+            case 43:
+               operator = "add";
+               break;
+            case 45:
+               operator = "subtract";
+               break;
+            case 47:
+               operator = "divide";
+               break;
+         }
+      }
+   }
+   
+   if(!secondNumChosen && firstNumChosen && operator != "") {
+         if(e.which >= 48 && e.which <=57|| e.which == 46) {
+            operatorChosen = true;
+            if(e.which == 46 && !decimalUsed) {
+               secondNum = secondNum.concat(".");
+               decimalUsed = true;
+               displayArea.textContent = secondNum;
+            } else if(e.which >= 48 && e.which <=57) {
+               secondNum = secondNum.concat(e.key);
+               displayArea.textContent = secondNum;
+            }
+         }
+   }
+   
+   if(firstNumChosen && operatorChosen && secondNum) {
+         if(e.which == 13 ) {
+            secondNumChosen = true;
+            let a = Number(firstNum);
+            let b = Number(secondNum);
+            switch(operator) {
+               case "add":
+                  firstNum = add(a,b);
+                  displayArea.textContent = shrinkNum(firstNum);
+                  firstNum = firstNum.toString();
+                  operator = "";
+                  secondNum = "";
+                  break;
+               case "multiply":
+                  firstNum = multiply(a, b);
+                  displayArea.textContent = shrinkNum(firstNum);
+                  firstNum = firstNum.toString();
+                  operator = "";
+                  secondNum = "";
+                  // halfResetter();
+                  break;
+               case "subtract":
+                  firstNum = subtract(a,b);
+                  displayArea.textContent = shrinkNum(firstNum);
+                  firstNum = firstNum.toString();
+                  operator = "";
+                  secondNum = "";
+                  // halfResetter();
+                  break;
+               case "divide":
+                  firstNum = divide(a,b);
+                  displayArea.textContent = shrinkNum(firstNum);
+                  firstNum = firstNum.toString();
+                  operator = "";
+                  secondNum = "";
+                  // halfResetter();
+                  break;
+            }
+         }
+      }
+      
+      
+      if(secondNumChosen) {
+         if(e.which >= 48 && e.which <=57) {
+            tempNum = e.key;
+            console.log("tempNum is " + tempNum);
+            fullReset();
+            firstNum = tempNum;
+            displayArea.textContent = firstNum;
+            tempNum = "";
+         } else if(e.which == 42 || e.which == 43 || e.which == 45 || e.which ==47) {
+            switch(e.which) {
+            case 42:
+               tempFunc = "multiply";
+               break;
+            case 43:
+               tempFunc = "add";
+               break;
+            case 45:
+               tempFunc = "subtract";
+               break;
+            case 47:
+               tempFunc = "divide";
+               break;
+         }
+            halfResetter();
+            operator = tempFunc;
+            tempFunc = "";
+         }
+      } 
+      
+      formulaArea.textContent = firstNum + " " + toSymbol(operator) + " " + secondNum;
+   
+   
+   
+}
+
 let allButtons = Array.from(
    document.getElementsByClassName("button")
    );
